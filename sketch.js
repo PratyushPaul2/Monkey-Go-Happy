@@ -26,7 +26,7 @@ monkey.addAnimation("moving", monkey_running);
   background0.velocityX=-4;
  
   bananaGroup=new Group();
-  
+  obstacleGroup=new Group();
 }
 
 
@@ -37,6 +37,10 @@ background(220);
   if(keyDown("space")&&monkey.y>314){
     monkey.velocityY=-12;
     
+  }
+  
+  if(bananaGroup.isTouching(monkey)){
+    bananaGroup.destroyEach();
   }
   monkey.velocityY=monkey.velocityY+.5;
   
@@ -50,14 +54,31 @@ function bananas(){
   if(World.frameCount%80===0){
     banana=createSprite(600, Math.round(random(130, 230)), 20, 20);
     banana.addImage(bananaImage);
-    banana.velocityX=-5;
-    banana.scale=.1
+    banana.velocityX=-8;
+    banana.scale=.1;
+    banana.lifetime=150
     
     bananaGroup.add(banana);
   }
   
   
 }
+
+function obstacles(){
+  if(World.frameCount%300===0){
+    obstacle=createSprite(600, 315, 20, 20);
+    obstacle.addImage(obstacleImage);
+    obstacle.velocityX=-10
+    obstacle.scale=.2
+    obstacle.lifetime=62;
+    
+    obstacleGroup.add(obstacle);
+  }
+  
+  
+  
+}
+
 
 
 
